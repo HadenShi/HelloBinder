@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         05/01/2018
+ * 05/01/2018
  */
 public abstract class Stub extends Binder implements BookManager {
 
@@ -24,12 +24,15 @@ public abstract class Stub extends Binder implements BookManager {
     }
 
     public static BookManager asInterface(IBinder binder) {
-        if (binder == null)
+        if (binder == null) {
             return null;
+        }
         IInterface iin = binder.queryLocalInterface(DESCRIPTOR);
-        if (iin != null && iin instanceof BookManager)
+        if (iin instanceof BookManager) {
             return (BookManager) iin;
-        return new Proxy(binder);
+        } else {
+            return new Proxy(binder);
+        }
     }
 
     @Override
@@ -40,7 +43,6 @@ public abstract class Stub extends Binder implements BookManager {
     @Override
     protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
         switch (code) {
-
             case INTERFACE_TRANSACTION:
                 reply.writeString(DESCRIPTOR);
                 return true;
@@ -61,7 +63,6 @@ public abstract class Stub extends Binder implements BookManager {
                 this.addBook(arg0);
                 reply.writeNoException();
                 return true;
-
         }
         return super.onTransact(code, data, reply, flags);
     }

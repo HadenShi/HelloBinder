@@ -58,7 +58,6 @@ public class ClientActivity extends AppCompatActivity {
     }
 
     private void attemptToBindService() {
-
         Intent intent = new Intent(this, RemoteService.class);
         intent.setAction("com.baronzhang.ipc.server");
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
